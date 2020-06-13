@@ -1618,13 +1618,13 @@
           "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
         }
       },
-      "Adder/1.0.0": {
+      "FullAdder/1.0.0": {
         "type": "project",
         "compile": {
-          "bin/placeholder/Adder.dll": {}
+          "bin/placeholder/FullAdder.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Adder.dll": {}
+          "bin/placeholder/FullAdder.dll": {}
         }
       }
     }
@@ -5814,15 +5814,15 @@
         "system.xml.xpath.xmldocument.nuspec"
       ]
     },
-    "Adder/1.0.0": {
+    "FullAdder/1.0.0": {
       "type": "project",
-      "path": "../Adder/Adder.csproj",
-      "msbuildProject": "../Adder/Adder.csproj"
+      "path": "../FullAdder/FullAdder.csproj",
+      "msbuildProject": "../FullAdder/FullAdder.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
-      "Adder >= 1.0.0",
+      "FullAdder >= 1.0.0",
       "MSTest.TestAdapter >= 1.3.2",
       "MSTest.TestFramework >= 1.3.2",
       "Microsoft.NET.Test.Sdk >= 15.9.0",
@@ -5836,11 +5836,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\bryan\\source\\repos\\Adder\\UnitTests\\UnitTests.csproj",
+      "projectUniqueName": "C:\\Users\\bryan\\source\\repos\\FullAdder\\UnitTests\\UnitTests.csproj",
       "projectName": "UnitTests",
-      "projectPath": "C:\\Users\\bryan\\source\\repos\\Adder\\UnitTests\\UnitTests.csproj",
+      "projectPath": "C:\\Users\\bryan\\source\\repos\\FullAdder\\UnitTests\\UnitTests.csproj",
       "packagesPath": "C:\\Users\\bryan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\bryan\\source\\repos\\Adder\\UnitTests\\obj\\",
+      "outputPath": "C:\\Users\\bryan\\source\\repos\\FullAdder\\UnitTests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -5859,8 +5859,8 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "C:\\Users\\bryan\\source\\repos\\Adder\\Adder\\Adder.csproj": {
-              "projectPath": "C:\\Users\\bryan\\source\\repos\\Adder\\Adder\\Adder.csproj"
+            "C:\\Users\\bryan\\source\\repos\\FullAdder\\FullAdder\\FullAdder.csproj": {
+              "projectPath": "C:\\Users\\bryan\\source\\repos\\FullAdder\\FullAdder\\FullAdder.csproj"
             }
           }
         }

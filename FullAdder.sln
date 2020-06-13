@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.1145
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FullAdder", "FullAdder\FullAdder.csproj", "{E03CE98E-6464-4D8C-8FC2-3016C36AA4FF}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\UnitTests.csproj", "{7DF25E1F-66C0-4FF6-ADDB-BF7CFBA29D56}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{E03CE98E-6464-4D8C-8FC2-3016C36AA4FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E03CE98E-6464-4D8C-8FC2-3016C36AA4FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E03CE98E-6464-4D8C-8FC2-3016C36AA4FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DF25E1F-66C0-4FF6-ADDB-BF7CFBA29D56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DF25E1F-66C0-4FF6-ADDB-BF7CFBA29D56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DF25E1F-66C0-4FF6-ADDB-BF7CFBA29D56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DF25E1F-66C0-4FF6-ADDB-BF7CFBA29D56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

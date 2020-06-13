@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v2.1": {
       "UnitTests/1.0.0": {
         "dependencies": {
-          "Adder": "1.0.0",
+          "FullAdder": "1.0.0",
           "MSTest.TestAdapter": "1.3.2",
           "MSTest.TestFramework": "1.3.2",
           "Microsoft.NET.Test.Sdk": "15.9.0"
@@ -1014,9 +1014,9 @@
           }
         }
       },
-      "Adder/1.0.0": {
+      "FullAdder/1.0.0": {
         "runtime": {
-          "Adder.exe": {}
+          "FullAdder.exe": {}
         }
       }
     }
@@ -1517,7 +1517,7 @@
       "path": "system.xml.xpath.xmldocument/4.0.1",
       "hashPath": "system.xml.xpath.xmldocument.4.0.1.nupkg.sha512"
     },
-    "Adder/1.0.0": {
+    "FullAdder/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
