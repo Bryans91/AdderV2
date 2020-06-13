@@ -71,6 +71,8 @@
     <Compile Include="IO\ConsoleIO.cs" />
     <Compile Include="IO\FileParser.cs" />
     <Compile Include="IO\FileReader.cs" />
+    <Compile Include="View\InputViewModel.cs" />
+    <Compile Include="View\VisitorOutputModel.cs" />
     <Compile Include="Visitors\Cleaner.cs" />
     <Compile Include="Visitors\Connections.cs" />
     <Compile Include="Visitors\Displayer.cs" />
@@ -115,8 +117,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="View\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

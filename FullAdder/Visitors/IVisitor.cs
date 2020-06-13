@@ -10,6 +10,9 @@ namespace Adder.Visitors
 {
     public interface IVisitor
     {
+
+        List<string> Output { get; set; }
+
         void Visit(Component visited);
 
         void Visit(Circuit visited);

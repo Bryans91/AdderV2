@@ -10,6 +10,13 @@ namespace Adder.Visitors
 {
     public class Displayer : IVisitor
     {
+        public List<string> Output { get; set; }
+
+        public Displayer()
+        {
+            Output = new List<string>();
+        }
+
         public void Visit(Component visited)
         {
             throw new NotImplementedException();

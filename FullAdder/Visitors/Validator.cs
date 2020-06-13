@@ -10,6 +10,14 @@ namespace Adder.Visitors
 {
     public class Validator : IVisitor
     {
+
+        public List<string> Output { get; set; }
+
+        public Validator()
+        {
+            Output = new List<string>();
+        }
+
         public void Visit(Component visited)
         {
             throw new NotImplementedException();

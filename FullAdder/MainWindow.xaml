@@ -3,27 +3,29 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FullAdder"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
+         xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <ItemsControl Name="NodeList" Margin="0,0,660,0">
-            <ItemsControl.ItemTemplate>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,0,0,164">
+            <ItemsControl ItemsSource="{Binding Output.List, UpdateSourceTrigger=PropertyChanged}" Name="OutputList" Margin="0,0,10,174">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate  DataType="{x:Type system:String}">
+                        <TextBlock Text="{Binding Path=., UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <ListBox Name="InputChecks" Height="115" Background="Azure" Margin="10,272,621,32">
+            <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid Margin="0,0,0,5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="50" />
-                            <ColumnDefinition Width="40" />
-                            <ColumnDefinition Width="30" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding Name}" />
-                        <TextBlock Grid.Column="1" Text="{Binding ClassType }" />
-                        <TextBlock Grid.Column="2" Text="{Binding OutputName }" />
-                    </Grid>
+                    <CheckBox Content="{Binding Name}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" IsChecked="{Binding Value ,Mode=TwoWay}" Margin="0,5,0,0"/>
                 </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
         <ComboBox Width="200" Height="30" Name="VisitorList" Margin="385,357,207,32" SelectionChanged="Visitors_SelectionChanged" SelectedIndex="0">
             <ComboBox.ItemTemplate>
                 <DataTemplate>

@@ -7,8 +7,13 @@ namespace Adder.Visitors
 {
     public class Connections : IVisitor
     {
-        public List<string> data { get; set; }
+        public List<string> Output { get; set; }
 
+
+        public Connections()
+        {
+            Output = new List<string>();
+        }
 
         public void Visit(Component visited)
         {
@@ -62,8 +67,12 @@ namespace Adder.Visitors
 
         private void NodeConnectsTo(Node node)
         {
+            Output.Add(node.Name + " " + node.GetType().Name + " connects to:");
+
+
             Console.WriteLine(node.Name + " " + node.GetType().Name + " connects to:");
             node.OutputList.ForEach((item) => {
+                Output.Add(item.Out.Name + " " + item.Out.GetType().Name);
                 Console.WriteLine(item.Out.Name + " " + item.Out.GetType().Name);
             });
         }

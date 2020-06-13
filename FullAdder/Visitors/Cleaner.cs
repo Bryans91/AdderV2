@@ -10,6 +10,14 @@ namespace Adder.Visitors
 {
     public class Cleaner : IVisitor
     {
+
+        public List<string> Output { get; set; }
+
+        public Cleaner()
+        {
+            Output = new List<string>();
+        }
+
         public void Visit(Component visited)
         {
             ResetPrinted(visited);
