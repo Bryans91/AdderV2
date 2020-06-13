@@ -26,12 +26,22 @@ namespace FullAdder
     {
 
         public List<Component> Items { get; set; }
+        public IVisitor visit;
+        public Dictionary<string, IVisitor> VisitorOptions { get; set; }
+        public Circuit circuit;
+
+        public Dictionary<string,bool> Inputs { get; set; }
 
         public MainWindow()
         {
 
             this.Items = new List<Component>();
+            this.Inputs = new Dictionary<string, bool>();
 
+
+            this.VisitorOptions = new Dictionary<string, IVisitor>();
+            this.VisitorOptions.Add("Show connections", new Connections());
+            this.VisitorOptions.Add("Print Output", new Displayer());
 
             InitializeComponent();
 
@@ -53,33 +63,50 @@ namespace FullAdder
 
 
                 FileParser fp = new FileParser();
-                Circuit circuit = fp.ParseCircuit(filename);
+                circuit = fp.ParseCircuit(filename);
                 //Circuit circuit = fp.ParseCircuit("../../../Files/Circuit1_FullAdder.txt");
                 //Circuit circuit = fp.ParseCircuit("../../../Files/Circuit4_InfiniteLoop.txt");
                 this.Items.AddRange(circuit.Components);
+
+                circuit.Components.ForEach((comp) =>
+                {
+                    if(comp.ClassType == "Node")
+                    {
+                        
+                    }
+                });
+
+             
+
+
                 NodeList.ItemsSource = this.Items;
-           
-
-                try
-                {
-                    circuit.Run(new Connections());
-                    circuit.Run(new Cleaner());
-                    circuit.Run(new Validator());
-                    circuit.Run(new Cleaner());
-                    circuit.Run(new Displayer());
-                    circuit.PrintTime();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-
+                VisitorList.ItemsSource = this.VisitorOptions;
 
                 Console.WriteLine("ended");
 
             }
 
             Console.Read();
+        }
+
+        private void Visitors_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            this.visit = (IVisitor) ((dynamic) VisitorList.SelectedItem).Value;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                circuit.Run(this.visit);
+                circuit.Run(new Cleaner());
+                circuit.PrintTime();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
         }
     }
 }

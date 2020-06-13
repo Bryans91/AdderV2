@@ -1,4 +1,3 @@
-C:\Users\bryan\source\repos\FullAdder\FullAdder\obj\Debug\FullAdder.csprojAssemblyReference.cache
 C:\Users\bryan\source\repos\FullAdder\FullAdder\obj\Debug\MainWindow.g.cs
 C:\Users\bryan\source\repos\FullAdder\FullAdder\obj\Debug\App.g.cs
 C:\Users\bryan\source\repos\FullAdder\FullAdder\obj\Debug\FullAdder_MarkupCompile.cache
@@ -13,3 +12,4 @@ C:\Users\bryan\source\repos\FullAdder\FullAdder\obj\Debug\FullAdder.csproj.Gener
 C:\Users\bryan\source\repos\FullAdder\FullAdder\obj\Debug\FullAdder.csproj.CoreCompileInputs.cache
 C:\Users\bryan\source\repos\FullAdder\FullAdder\obj\Debug\FullAdder.exe
 C:\Users\bryan\source\repos\FullAdder\FullAdder\obj\Debug\FullAdder.pdb
+C:\Users\bryan\source\repos\FullAdder\FullAdder\obj\Debug\FullAdder.csprojAssemblyReference.cache

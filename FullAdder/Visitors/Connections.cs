@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Adder.Components;
 using Adder.Components.Nodes;
 
@@ -6,6 +7,9 @@ namespace Adder.Visitors
 {
     public class Connections : IVisitor
     {
+        public List<string> data { get; set; }
+
+
         public void Visit(Component visited)
         {
             throw new NotImplementedException();

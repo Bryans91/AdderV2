@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <ItemsControl Name="NodeList">
+        <ItemsControl Name="NodeList" Margin="0,0,660,0">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="0,0,0,5">
@@ -24,5 +24,15 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
+        <ComboBox Width="200" Height="30" Name="VisitorList" Margin="385,357,207,32" SelectionChanged="Visitors_SelectionChanged" SelectedIndex="0">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Key}"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Button Width="140" Height="50" Margin="619,337,33,32" Click="Button_Click" >Run</Button>
     </Grid>
 </Window>
