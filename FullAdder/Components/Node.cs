@@ -41,7 +41,7 @@ namespace Adder.Components
 
                     if(edge.Out.IsResolveable())
                     {
-                       //edge.Out.Run(visitor);
+                        edge.Out.Run(visitor);
                     }
                 });
             }
@@ -76,6 +76,7 @@ namespace Adder.Components
         {
             this.DefaultInputs.Add(name, input);
             this.NrOfInputs++;
+            this.InputList.Add(input);
         }
 
         public virtual bool IsResolveable()
