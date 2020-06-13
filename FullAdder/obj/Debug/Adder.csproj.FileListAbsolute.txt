@@ -1,0 +1,7 @@
+C:\Users\bryan\source\repos\Adder\Adder\bin\Debug\Adder.exe.config
+C:\Users\bryan\source\repos\Adder\Adder\bin\Debug\Adder.exe
+C:\Users\bryan\source\repos\Adder\Adder\bin\Debug\Adder.pdb
+C:\Users\bryan\source\repos\Adder\Adder\obj\Debug\Adder.csprojAssemblyReference.cache
+C:\Users\bryan\source\repos\Adder\Adder\obj\Debug\Adder.csproj.CoreCompileInputs.cache
+C:\Users\bryan\source\repos\Adder\Adder\obj\Debug\Adder.exe
+C:\Users\bryan\source\repos\Adder\Adder\obj\Debug\Adder.pdb
