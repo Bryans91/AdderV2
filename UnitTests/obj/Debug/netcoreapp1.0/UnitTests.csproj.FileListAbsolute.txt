@@ -1,0 +1,6 @@
+C:\Users\Benny\Desktop\School\Adderr\UnitTests\bin\Debug\netcoreapp1.0\UnitTests.deps.json
+C:\Users\Benny\Desktop\School\Adderr\UnitTests\bin\Debug\netcoreapp1.0\UnitTests.runtimeconfig.json
+C:\Users\Benny\Desktop\School\Adderr\UnitTests\bin\Debug\netcoreapp1.0\UnitTests.runtimeconfig.dev.json
+C:\Users\Benny\Desktop\School\Adderr\UnitTests\obj\Debug\netcoreapp1.0\UnitTests.csprojAssemblyReference.cache
+C:\Users\Benny\Desktop\School\Adderr\UnitTests\obj\Debug\netcoreapp1.0\UnitTests.csproj.CoreCompileInputs.cache
+C:\Users\Benny\Desktop\School\Adderr\UnitTests\obj\Debug\netcoreapp1.0\UnitTests.AssemblyInfo.cs

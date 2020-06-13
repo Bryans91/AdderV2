@@ -17,8 +17,8 @@ namespace Adder.IO
         public bool A = false;
         public bool B = false;
         public bool Cin = false;
-        IDictionary<string, bool> InputDictionary = new Dictionary<string, bool>();
-        IDictionary<string, Node> NodeDictionairy = new Dictionary<string, Node>();
+        public IDictionary<string, bool> InputDictionary = new Dictionary<string, bool>();
+        public IDictionary<string, Node> NodeDictionairy = new Dictionary<string, Node>();
         Circuit circuit;
 
         public Circuit ParseCircuit(String filePath)
@@ -66,7 +66,7 @@ namespace Adder.IO
             return null;
         }
 
-        private Node AddNode(String[] nodeParts)
+        public Node AddNode(String[] nodeParts)
         {
             if ( ! nodeParts[1].Contains("INPUT") && ! nodeParts[1].Contains("PROBE"))
             {
@@ -83,7 +83,7 @@ namespace Adder.IO
             return null;
         }
 
-        private void AddEdges(String[] edgeParts)
+        public void AddEdges(String[] edgeParts)
         {
 
             bool inputType = false;
@@ -121,7 +121,7 @@ namespace Adder.IO
 
         }
 
-        private String[] GetCircuitParts(String line)
+        public String[] GetCircuitParts(String line)
         {
             String pattern = @"([a-zA-Z0-9_]+)";
             var result = Regex.Matches(line, pattern)
