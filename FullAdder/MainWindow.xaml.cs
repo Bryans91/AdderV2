@@ -24,40 +24,60 @@ namespace FullAdder
     /// </summary>
     public partial class MainWindow : Window
     {
-        [DllImport("Kernel32")]
-        public static extern void AllocConsole();
 
-        [DllImport("Kernel32")]
-        public static extern void FreeConsole();
+        public List<Component> Items { get; set; }
 
         public MainWindow()
         {
+
+            this.Items = new List<Component>();
+
+
             InitializeComponent();
 
+            // Configure open file dialog box
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.FileName = "Document"; // Default file name
+            dlg.DefaultExt = ".txt"; // Default file extension
+            dlg.Filter = "Text documents (.txt)|*.txt"; // Filter files by extension
 
-            FileParser fp = new FileParser();
-            //Circuit circuit = fp.ParseCircuit("../../../Files/Circuit1_FullAdder.txt");
-            Circuit circuit = fp.ParseCircuit("../../../Files/Circuit4_InfiniteLoop.txt");
+            // Show open file dialog box
+            Nullable<bool> result = dlg.ShowDialog();
 
-
-            try
+            // Process open file dialog box results
+            if (result == true)
             {
-                circuit.Run(new Connections());
-                circuit.Run(new Cleaner());
-                circuit.Run(new Validator());
-                circuit.Run(new Cleaner());
-                circuit.Run(new Displayer());
-                circuit.PrintTime();
+                // Open document
+                string filename = dlg.FileName;
+           
+
+
+                FileParser fp = new FileParser();
+                Circuit circuit = fp.ParseCircuit(filename);
+                //Circuit circuit = fp.ParseCircuit("../../../Files/Circuit1_FullAdder.txt");
+                //Circuit circuit = fp.ParseCircuit("../../../Files/Circuit4_InfiniteLoop.txt");
+                this.Items.AddRange(circuit.Components);
+                NodeList.ItemsSource = this.Items;
+           
+
+                try
+                {
+                    circuit.Run(new Connections());
+                    circuit.Run(new Cleaner());
+                    circuit.Run(new Validator());
+                    circuit.Run(new Cleaner());
+                    circuit.Run(new Displayer());
+                    circuit.PrintTime();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+
+
+                Console.WriteLine("ended");
+
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
-
-            Console.WriteLine("ended");
-
-
 
             Console.Read();
         }

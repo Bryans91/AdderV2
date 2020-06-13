@@ -41,7 +41,7 @@ namespace Adder.Components
 
                     if(edge.Out.IsResolveable())
                     {
-                       edge.Out.Run(visitor);
+                       //edge.Out.Run(visitor);
                     }
                 });
             }

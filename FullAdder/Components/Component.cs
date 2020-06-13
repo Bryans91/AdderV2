@@ -16,7 +16,8 @@ namespace Adder.Components
 
         public bool Printed { get; set; } = false;
         public TimeSpan TimeSpan { get; set; }
-      
+        public string ClassType { get { return this.GetType().Name;} }
+
 
         public virtual void Run(IVisitor visitor)
         {
@@ -39,5 +40,7 @@ namespace Adder.Components
         {
             Console.WriteLine("{0} ran for: {1} (microseconds)",  this.Name, TimeSpan.Ticks / 1000);
         }
+
+     
     }
 }
