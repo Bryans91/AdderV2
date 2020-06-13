@@ -8,7 +8,7 @@ using Adder.Components;
 
 namespace Adder.Builders
 {
-    class Builder : IBuilder
+    public class Builder : IBuilder
     {
         private Node node;
 
