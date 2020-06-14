@@ -68,11 +68,11 @@
     <Compile Include="Components\Nodes\Or.cs" />
     <Compile Include="Components\Nodes\Xor.cs" />
     <Compile Include="Factories\NodeFactory.cs" />
-    <Compile Include="IO\ConsoleIO.cs" />
     <Compile Include="IO\FileParser.cs" />
     <Compile Include="IO\FileReader.cs" />
     <Compile Include="View\ErrorViewModel.cs" />
     <Compile Include="View\InputViewModel.cs" />
+    <Compile Include="View\TimerViewModel.cs" />
     <Compile Include="View\VisitorOutputModel.cs" />
     <Compile Include="Visitors\Cleaner.cs" />
     <Compile Include="Visitors\Connections.cs" />
@@ -110,6 +110,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagram.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

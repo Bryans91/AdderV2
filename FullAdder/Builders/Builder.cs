@@ -18,11 +18,6 @@ namespace Adder.Builders
             node = nodeFactory.Create(type);
         }
 
-        public void addEdges()
-        {
-
-        }
-
         public void setName(String name)
         {
             node.Name = name;
