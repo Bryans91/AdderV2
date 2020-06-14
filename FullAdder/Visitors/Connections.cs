@@ -22,7 +22,6 @@ namespace Adder.Visitors
 
         public void Visit(Circuit visited)
         {
-            // Console.Out.WriteLine(visited.Name + " Contains:");
             visited.Components.ForEach((component) =>
             {
                 if (component.ClassType != "Circuit")
@@ -42,9 +41,7 @@ namespace Adder.Visitors
                         });
                     }
                 }
-               // Console.Out.WriteLine(component.Name + " = " + component.GetType().Name);
             });
-            Console.Out.WriteLine("hoi");
         }
 
         public void Visit(Node visited)

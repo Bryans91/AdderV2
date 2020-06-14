@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid Background="LightBlue">
-        <ScrollViewer Background="Azure" VerticalScrollBarVisibility="Auto" Margin="375,10,10,10">
+        <ScrollViewer Background="Azure" VerticalScrollBarVisibility="Auto" Margin="375,10,10,31">
             <ItemsControl ItemsSource="{Binding Output.List, UpdateSourceTrigger=PropertyChanged}" Name="OutputList" Margin="0,0,10,174">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate  DataType="{x:Type system:String}">
@@ -37,5 +37,6 @@
         </ComboBox>
         <Button Background="Azure" Margin="10,365,547,22" Click="Button_Click" >Run</Button>
         <TextBlock HorizontalAlignment="Left" Margin="10,255,0,0" TextWrapping="Wrap" Foreground="Red" Text="{Binding Error.Message, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="53" Width="235"/>
+        <TextBlock HorizontalAlignment="Left" Margin="375,388,0,0" TextWrapping="Wrap" Foreground="Black" Text="{Binding Timer.Message, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="21" Width="262"/>
     </Grid>
 </Window>

@@ -101,7 +101,7 @@ namespace Adder.Visitors
         {
             if (node.Visited > node.NrOfInputs)
             {
-                throw new Exception("Infinite loop detected at node (visited counter): " + node.Name);
+                throw new Exception("Infinite loop detected at node: " + node.Name + " " + node.ClassType);
             }
 
             return false;
