@@ -17,7 +17,6 @@ namespace Adder.Components
         public bool Output { get; set; }
         public int NrOfInputs { get; set; }
 
-
         public Node()
         {
             OutputList = new List<Edge>();
@@ -33,13 +32,17 @@ namespace Adder.Components
             base.Run(visitor);
 
             //pass Data on
-            if (IsResolveable())
+            if (IsResolveable() && !Resolved)
             {
+                Resolved = true;
                 OutputList.ForEach((Edge edge) =>
                 {
                     edge.Out.RecieveInput(Output);
-
-                    if(edge.Out.IsResolveable())
+                    if (this.Name == "NODE5")
+                    {
+                        Console.WriteLine('t');
+                    }
+                    if (edge.Out.IsResolveable())
                     {
                         edge.Out.Run(visitor);
                     }
@@ -81,7 +84,7 @@ namespace Adder.Components
 
         public virtual bool IsResolveable()
         {
-            return InputList.Count >= NrOfInputs;
+            return InputList.Count == NrOfInputs;
         }
 
         public void SetDefaultInputs()

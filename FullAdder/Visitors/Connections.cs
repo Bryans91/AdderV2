@@ -25,14 +25,22 @@ namespace Adder.Visitors
             // Console.Out.WriteLine(visited.Name + " Contains:");
             visited.Components.ForEach((component) =>
             {
-                if (component.ClassType == "Node")
+                if (component.ClassType != "Circuit")
                 {
                     Node node = (Node)component;
 
                     Output.Add(node.Name + " Connects to: ");
-                    node.OutputList.ForEach((edge) => {
-                        Output.Add(edge.Out.Name + ' ' + edge.Out.ClassType);
-                    });
+                    if (node.OutputName != null)
+                    {
+                        Output.Add(node.OutputName);
+                    }
+                    else
+                    {
+                        node.OutputList.ForEach((edge) =>
+                        {
+                            Output.Add(edge.Out.Name + ' ' + edge.Out.ClassType);
+                        });
+                    }
                 }
                // Console.Out.WriteLine(component.Name + " = " + component.GetType().Name);
             });
@@ -78,18 +86,18 @@ namespace Adder.Visitors
         private void NodeConnectsTo(Node node)
         {
 
-            if (node.IsResolveable())
-            {
-                Output.Add(node.Name + " " + node.GetType().Name + " connects to:");
+            //if (node.IsResolveable())
+            //{
+            //    Output.Add(node.Name + " " + node.GetType().Name + " connects to:");
 
 
-                Console.WriteLine(node.Name + " " + node.GetType().Name + " connects to:");
-                node.OutputList.ForEach((item) =>
-                {
-                    Output.Add(item.Out.Name + " " + item.Out.GetType().Name);
-                    Console.WriteLine(item.Out.Name + " " + item.Out.GetType().Name);
-                });
-            }
+            //    Console.WriteLine(node.Name + " " + node.GetType().Name + " connects to:");
+            //    node.OutputList.ForEach((item) =>
+            //    {
+            //        Output.Add(item.Out.Name + " " + item.Out.GetType().Name);
+            //        Console.WriteLine(item.Out.Name + " " + item.Out.GetType().Name);
+            //    });
+            //}
         }
     }
 }

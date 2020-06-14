@@ -13,7 +13,7 @@ namespace Adder.Components
         public string Name { get; set; }
         public string OutputName { get; set; } = null;
         public int Visited { get; set; } = 0;
-
+        public bool Resolved { get; set; } = false;
         public bool Printed { get; set; } = false;
         public TimeSpan TimeSpan { get; set; }
         public string ClassType { get { return this.GetType().Name;} }
