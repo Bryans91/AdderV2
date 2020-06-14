@@ -133,6 +133,8 @@ namespace FullAdder
         {
             try
             {
+                Validate();
+          
                 circuit.Run(this.visit);
                 this.Output.List = new ObservableCollection<string>(this.visit.Output);
          
@@ -171,6 +173,12 @@ namespace FullAdder
                     }
                 }
             });
+        }
+
+        private void Validate()
+        {
+            circuit.Run(new Validator());
+            circuit.Run(new Cleaner());
         }
     }
 }
