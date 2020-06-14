@@ -16,6 +16,7 @@ namespace Adder.Components
 
         public bool Output { get; set; }
         public int NrOfInputs { get; set; }
+        public bool DefaultSet { get; set; } = false;
 
         public Node()
         {
@@ -38,10 +39,6 @@ namespace Adder.Components
                 OutputList.ForEach((Edge edge) =>
                 {
                     edge.Out.RecieveInput(Output);
-                    if (this.Name == "NODE5")
-                    {
-                        Console.WriteLine('t');
-                    }
                     if (edge.Out.IsResolveable())
                     {
                         edge.Out.Run(visitor);
@@ -78,8 +75,7 @@ namespace Adder.Components
         public void AddDefaultInputs(string name,bool input)
         {
             this.DefaultInputs.Add(name, input);
-            this.NrOfInputs++;
-            this.InputList.Add(input);
+            this.NrOfInputs++; 
         }
 
         public virtual bool IsResolveable()
@@ -89,8 +85,9 @@ namespace Adder.Components
 
         public void SetDefaultInputs()
         {
-            if (InputList.Count == 0 && DefaultInputs.Count > 0)
+            if (!DefaultSet)
             {
+                DefaultSet = true;
                 InputList.AddRange(DefaultInputs.Values);
             }
         }

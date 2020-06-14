@@ -78,6 +78,8 @@ namespace Adder.Visitors
         {
             node.InputList.Clear();
             node.Visited = 0;
+            node.Resolved = false;
+            node.DefaultSet = false;
         }
     }
 }

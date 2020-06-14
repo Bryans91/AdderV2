@@ -67,7 +67,6 @@ namespace Adder.Visitors
         {
             if (node.IsResolveable() && !node.Printed)
             {
-
                 node.Printed = true;
 
                 if (node.OutputList.Count > 0)
