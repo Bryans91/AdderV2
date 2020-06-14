@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -9,16 +8,20 @@ using System.Threading.Tasks;
 
 namespace FullAdder.View
 {
-    public class VisitorOutputModel : INotifyPropertyChanged
+    public class TimerViewModel : INotifyPropertyChanged
     {
-        private ObservableCollection<string> _list = new ObservableCollection<string>();
-        public ObservableCollection<string> List
+        private string message;
+
+        public string Message
         {
-            get { return _list; }
+            get
+            {
+                return message;
+            }
             set
             {
-                _list = value;
-                OnPropertyChanged("List");
+                this.message = value;
+                OnPropertyChanged();
             }
         }
 
@@ -28,6 +31,5 @@ namespace FullAdder.View
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(v));
         }
-
     }
 }

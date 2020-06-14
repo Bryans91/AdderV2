@@ -33,6 +33,7 @@ namespace FullAdder
 
         public IVisitor visit;
         public ErrorViewModel Error { get; set; }
+        public TimerViewModel Timer { get; set; }
         public Circuit circuit;
 
         public MainWindow()
@@ -48,6 +49,7 @@ namespace FullAdder
 
         private void InitializeProperties()
         {
+            this.Timer = new TimerViewModel();
             this.Error = new ErrorViewModel();
             this.Inputs = new List<InputViewModel>();
             this.Output = new VisitorOutputModel();
@@ -137,9 +139,11 @@ namespace FullAdder
           
                 circuit.Run(this.visit);
                 this.Output.List = new ObservableCollection<string>(this.visit.Output);
-         
+                this.visit.Output.Clear();
+
                 circuit.Run(new Cleaner());
-                circuit.PrintTime();
+
+                this.Timer.Message = circuit.GetTime() + "(ns)";
             }
             catch (Exception ex)
             {

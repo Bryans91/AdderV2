@@ -27,6 +27,7 @@ namespace Adder.Components
             this.Accept(visitor);
 
             timer.Stop();
+           
             this.TimeSpan = timer.Elapsed;
         }
 
@@ -38,9 +39,14 @@ namespace Adder.Components
 
         public void PrintTime()
         {
-            Console.WriteLine("{0} ran for: {1} (microseconds)",  this.Name, TimeSpan.Ticks / 1000);
+            Console.WriteLine("{0} ran for: {1} (ns)",  this.Name, GetTime());
         }
 
-     
+        public long GetTime()
+        {
+            // 1 tick = 100 ns
+            return (long) TimeSpan.Ticks * 100;
+        }
+
     }
 }
