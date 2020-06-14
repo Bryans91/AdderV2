@@ -65,20 +65,29 @@ namespace Adder.Visitors
 
         private void PrintStandardNode(Node node)
         {
-            if (node.IsResolveable() && !node.Printed)
+            if (node.IsResolveable() && !node.Printed || node.OutputName != null)
             {
                 node.Printed = true;
 
                 if (node.OutputList.Count > 0)
                 {
                     Console.WriteLine("Node " + node.Name + " " + node.GetType().Name + " Outputs " + node.Output + " To:");
+
+                    Output.Add(node.Name + " " + node.ClassType + " outputs: " + node.Output + " To:");
                     node.OutputList.ForEach((Edge e) =>
                     {
-                        Console.WriteLine(e.Out.Name + " " + e.Out.GetType().Name);
+                        Output.Add(e.Out.Name + " " + e.Out.ClassType);
+
+                        //Console.WriteLine(e.Out.Name + " " + e.Out.GetType().Name);
                     });
                 }
                 else
                 {
+                    if(node.OutputName != null)
+                    {
+                        Output.Add(node.Name + " " + node.ClassType + " outputs: " + node.Output + " To:" + node.OutputName);
+                    }
+
                     Console.WriteLine("Node " + node.Name + " Outputs " + node.Output);
                 }
             }

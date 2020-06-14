@@ -22,11 +22,21 @@ namespace Adder.Visitors
 
         public void Visit(Circuit visited)
         {
-            Console.Out.WriteLine(visited.Name + " Contains:");
+            // Console.Out.WriteLine(visited.Name + " Contains:");
             visited.Components.ForEach((component) =>
             {
-                Console.Out.WriteLine(component.Name + " = " + component.GetType().Name);
+                if (component.ClassType == "Node")
+                {
+                    Node node = (Node)component;
+
+                    Output.Add(node.Name + " Connects to: ");
+                    node.OutputList.ForEach((edge) => {
+                        Output.Add(edge.Out.Name + ' ' + edge.Out.ClassType);
+                    });
+                }
+               // Console.Out.WriteLine(component.Name + " = " + component.GetType().Name);
             });
+            Console.Out.WriteLine("hoi");
         }
 
         public void Visit(Node visited)
@@ -67,14 +77,19 @@ namespace Adder.Visitors
 
         private void NodeConnectsTo(Node node)
         {
-            Output.Add(node.Name + " " + node.GetType().Name + " connects to:");
+
+            if (node.IsResolveable())
+            {
+                Output.Add(node.Name + " " + node.GetType().Name + " connects to:");
 
 
-            Console.WriteLine(node.Name + " " + node.GetType().Name + " connects to:");
-            node.OutputList.ForEach((item) => {
-                Output.Add(item.Out.Name + " " + item.Out.GetType().Name);
-                Console.WriteLine(item.Out.Name + " " + item.Out.GetType().Name);
-            });
+                Console.WriteLine(node.Name + " " + node.GetType().Name + " connects to:");
+                node.OutputList.ForEach((item) =>
+                {
+                    Output.Add(item.Out.Name + " " + item.Out.GetType().Name);
+                    Console.WriteLine(item.Out.Name + " " + item.Out.GetType().Name);
+                });
+            }
         }
     }
 }
