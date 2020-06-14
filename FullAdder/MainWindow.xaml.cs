@@ -177,7 +177,15 @@ namespace FullAdder
 
         private void Validate()
         {
+            circuit.Run(new Cleaner());
             circuit.Run(new Validator());
+            foreach(Component comp in circuit.Components)
+            {
+                if (comp.ClassType != "Circuit" && ! comp.Resolved)
+                {
+                    throw new Exception("Circuit not completed: " + comp.Name);
+                }
+            }
             circuit.Run(new Cleaner());
         }
     }
