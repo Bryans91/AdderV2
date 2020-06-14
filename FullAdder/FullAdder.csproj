@@ -71,6 +71,7 @@
     <Compile Include="IO\ConsoleIO.cs" />
     <Compile Include="IO\FileParser.cs" />
     <Compile Include="IO\FileReader.cs" />
+    <Compile Include="View\ErrorViewModel.cs" />
     <Compile Include="View\InputViewModel.cs" />
     <Compile Include="View\VisitorOutputModel.cs" />
     <Compile Include="Visitors\Cleaner.cs" />

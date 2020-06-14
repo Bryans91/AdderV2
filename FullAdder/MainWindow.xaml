@@ -7,8 +7,8 @@
          xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,0,0,164">
+    <Grid Background="LightBlue">
+        <ScrollViewer Background="Azure" VerticalScrollBarVisibility="Auto" Margin="375,10,10,10">
             <ItemsControl ItemsSource="{Binding Output.List, UpdateSourceTrigger=PropertyChanged}" Name="OutputList" Margin="0,0,10,174">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate  DataType="{x:Type system:String}">
@@ -18,7 +18,7 @@
             </ItemsControl>
         </ScrollViewer>
 
-        <ListBox Name="InputChecks" Height="115" Background="Azure" Margin="10,272,621,32">
+        <ListBox Name="InputChecks" Background="Azure" Margin="10,10,547,169">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <CheckBox Content="{Binding Name}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" IsChecked="{Binding Value ,Mode=TwoWay}" Margin="0,5,0,0"/>
@@ -26,7 +26,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <ComboBox Width="200" Height="30" Name="VisitorList" Margin="385,357,207,32" SelectionChanged="Visitors_SelectionChanged" SelectedIndex="0">
+        <ComboBox Background="Azure" Name="VisitorList" Margin="10,313,547,71" SelectionChanged="Visitors_SelectionChanged" SelectedIndex="0">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -35,6 +35,7 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <Button Width="140" Height="50" Margin="619,337,33,32" Click="Button_Click" >Run</Button>
+        <Button Background="Azure" Margin="10,365,547,22" Click="Button_Click" >Run</Button>
+        <TextBlock HorizontalAlignment="Left" Margin="10,255,0,0" TextWrapping="Wrap" Foreground="Red" Text="{Binding Error.Message, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="53" Width="235"/>
     </Grid>
 </Window>

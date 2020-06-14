@@ -28,31 +28,69 @@ namespace FullAdder
     {
         
         public VisitorOutputModel Output { get; set; }
-
-        public List<Component> Items { get; set; }
-        public IVisitor visit;
+        public List<InputViewModel> Inputs { get; set; }
         public Dictionary<string, IVisitor> VisitorOptions { get; set; }
 
+        public IVisitor visit;
+        public ErrorViewModel Error { get; set; }
         public Circuit circuit;
-        
-
-        public List<InputViewModel> Inputs { get; set; }
 
         public MainWindow()
         {
-
-            this.Items = new List<Component>();
-            this.Inputs = new List<InputViewModel>();
-            this.Output = new VisitorOutputModel();
-
-
-            this.VisitorOptions = new Dictionary<string, IVisitor>();
-            this.VisitorOptions.Add("Show connections", new Connections());
-            this.VisitorOptions.Add("Print Output", new Displayer());
-
+         
             InitializeComponent();
             this.DataContext = this;
 
+            InitializeProperties(); //Prepare view variables
+
+            OpenFileDialog();
+        }
+
+        private void InitializeProperties()
+        {
+            this.Error = new ErrorViewModel();
+            this.Inputs = new List<InputViewModel>();
+            this.Output = new VisitorOutputModel();
+            this.InitVisitorOptions();
+        }
+
+        private void InitVisitorOptions()
+        {
+            this.VisitorOptions = new Dictionary<string, IVisitor>
+            {
+                { "Show connections", new Connections() },
+                { "Print Output", new Displayer() }
+            };
+
+            VisitorList.ItemsSource = this.VisitorOptions;
+        }
+
+        private void SetInputBoxes()
+        {
+            //gets all possible input values
+            circuit.Components.ForEach((comp) =>
+            {
+                if (comp.ClassType != "Circuit")
+                {
+                    Node node = (Node)comp;
+                    if (node.DefaultInputs.Count > 0)
+                    {
+                        foreach (KeyValuePair<string, bool> entry in node.DefaultInputs)
+                        {
+                            if (!Inputs.Exists(x => x.Name == entry.Key))
+                            {
+                                Inputs.Add(new InputViewModel() { Name = entry.Key, Value = entry.Value });
+                            }
+                        }
+                    }
+                }
+            });
+
+            InputChecks.ItemsSource = this.Inputs;
+        }
+
+        private void OpenFileDialog()
+        {
             // Configure open file dialog box
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             dlg.FileName = "Circuit1_FullAdder"; // Default file name
@@ -65,55 +103,26 @@ namespace FullAdder
             // Process open file dialog box results
             if (result == true)
             {
-                // Open document
-                string filename = dlg.FileName;
-           
-
-
-                FileParser fp = new FileParser();
-                circuit = fp.ParseCircuit(filename);
-                //Circuit circuit = fp.ParseCircuit("../../../Files/Circuit1_FullAdder.txt");
-                //Circuit circuit = fp.ParseCircuit("../../../Files/Circuit4_InfiniteLoop.txt");
-                this.Items.AddRange(circuit.Components);
-
-
-                //gets all possible input values
-                circuit.Components.ForEach((comp) =>
+                try
                 {
-                    if(comp.ClassType != "Circuit")
-                    {
-                        Node node = (Node)comp;
-                        if(node.DefaultInputs.Count > 0)
-                        {
-                            foreach (KeyValuePair<string, bool> entry in node.DefaultInputs)
-                            {
-                                if (!Inputs.Exists(x => x.Name == entry.Key))
-                                {
-                                    Inputs.Add(new InputViewModel() { Name = entry.Key, Value = entry.Value });
-                                }
-                            }
-                        }
-                    }
-                });
+                    // Open document
+                    string filename = dlg.FileName;
 
+                    FileParser fp = new FileParser();
+                    circuit = fp.ParseCircuit(filename);
 
-                //OutputList.ItemsSource = this.Output.List;
-                
-
-               
-      
-
-                InputChecks.ItemsSource = this.Inputs;
-
-                VisitorList.ItemsSource = this.VisitorOptions;
-               
-                Console.WriteLine("ended");
-
+                    this.SetInputBoxes();
+                }
+                catch (Exception e)
+                {
+                    System.Windows.Application.Current.Shutdown();
+                }
             }
-
-            Console.Read();
+            else
+            {
+                System.Windows.Application.Current.Shutdown();
+            }
         }
-
 
         private void Visitors_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -132,9 +141,9 @@ namespace FullAdder
             }
             catch (Exception ex)
             {
+                this.Error.Message = ex.Message;
                 Console.WriteLine(ex.Message);
             }
-
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
