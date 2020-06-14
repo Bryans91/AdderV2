@@ -1,6 +1,7 @@
 ﻿using Adder.Components;
 using Adder.IO;
 using Adder.Visitors;
+using Adder.Builders;
 using FullAdder.View;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,8 @@ namespace FullAdder
         public VisitorOutputModel Output { get; set; }
         public List<InputViewModel> Inputs { get; set; }
         public Dictionary<string, IVisitor> VisitorOptions { get; set; }
+        public IDictionary<string, bool> InputDictionary = new Dictionary<string, bool>();
+        public IDictionary<string, Node> NodeDictionairy = new Dictionary<string, Node>();
 
         public IVisitor visit;
         public ErrorViewModel Error { get; set; }
@@ -109,7 +112,26 @@ namespace FullAdder
                     string filename = dlg.FileName;
 
                     FileParser fp = new FileParser();
-                    circuit = fp.ParseCircuit(filename);
+                    fp.ParseCircuit(filename);
+                    List<string[]> Nodes = fp.Nodes;
+                    List<string[]> Edges = fp.Edges;
+
+                    circuit = new Circuit() { Name = "Circuit 1" };
+
+                    foreach (string[] NodeData in Nodes)
+                    {
+                        Node node = AddNode(NodeData);
+                        if (node != null)
+                        {
+                            NodeDictionairy[node.Name] = node;
+                        }
+                    }
+
+                    foreach (string[] EdgeData in Edges)
+                    {
+                        AddEdges(EdgeData);
+                    }
+
 
                     this.SetInputBoxes();
                 }
@@ -122,6 +144,63 @@ namespace FullAdder
             {
                 System.Windows.Application.Current.Shutdown();
             }
+        }
+
+        public Node AddNode(String[] nodeParts)
+        {
+            if (!nodeParts[1].Contains("INPUT") && !nodeParts[1].Contains("PROBE"))
+            {
+                Builder nodeBuilder = new Builder(nodeParts[1]);
+                nodeBuilder.setName(nodeParts[0]);
+
+                return nodeBuilder.Result();
+            }
+            if (nodeParts[1].Contains("INPUT"))
+            {
+                InputDictionary.Add(nodeParts[0], nodeParts[1].Contains("HIGH") ? true : false);
+            }
+
+            return null;
+        }
+
+        public void AddEdges(String[] edgeParts)
+        {
+
+            bool inputType = false;
+            bool input = false;
+
+            if (!edgeParts[0].StartsWith("NODE"))
+            {
+                inputType = true;
+                input = InputDictionary[edgeParts[0]];
+            }
+
+            foreach (String edgePart in edgeParts.Skip(1))
+            {
+
+                if (edgePart.StartsWith("NODE"))
+                {
+
+                    if (inputType)
+                    {
+                        NodeDictionairy[edgePart].AddDefaultInputs(edgeParts[0], input);
+                    }
+                    else
+                    {
+                        NodeDictionairy[edgeParts[0]].AddOutput(NodeDictionairy[edgePart]);
+                    }
+                }
+                else
+                {
+                    NodeDictionairy[edgeParts[0]].OutputName = edgePart;
+                }
+            }
+
+            if (!inputType)
+            {
+                circuit.Components.Add(NodeDictionairy[edgeParts[0]]);
+            }
+
         }
 
         private void Visitors_SelectionChanged(object sender, SelectionChangedEventArgs e)

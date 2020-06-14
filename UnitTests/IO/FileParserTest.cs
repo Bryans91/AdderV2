@@ -25,17 +25,26 @@ namespace UnitTests.IO
                 "A1: INPUT_HIGH;"
             };
 
+            string[] expectedKeys =
+            {
+                "A", "B", "Cin", "A0", "A1"
+            };
+
+            string[] expectedValues =
+            {
+                "INPUT_HIGH", "INPUT_LOW", "INPUT_HIGH", "INPUT_LOW", "INPUT_HIGH"
+            };
+
+            String[] circuitParts;
+
+            int i = 0;
             foreach (string line in lines)
             {
-                String[] circuitParts = fp.GetCircuitParts(line);
-                fp.AddNode(circuitParts);
+                circuitParts = fp.GetCircuitParts(line);
+                Assert.AreEqual(circuitParts[0], expectedKeys[i]);
+                Assert.AreEqual(circuitParts[1], expectedValues[i]);
+                i++;
             }
-
-            Assert.IsTrue(fp.InputDictionary["A"]);
-            Assert.IsFalse(fp.InputDictionary["B"]);
-            Assert.IsTrue(fp.InputDictionary["Cin"]);
-            Assert.IsFalse(fp.InputDictionary["A0"]);
-            Assert.IsTrue(fp.InputDictionary["A1"]);
 
         }
 
@@ -52,23 +61,24 @@ namespace UnitTests.IO
                 "NOTNODE: NOT;"
             };
 
-            string[] types =
+            string[] expectedKeys =
             {
-                "Or",
-                "Xor",
-                "And",
-                "Nand",
-                "Nor",
-                "Not"
+                "ORNODE", "XORNODE", "ANDNODE", "NANDNODE", "NORNODE", "NOTNODE"
             };
+
+            string[] expectedValues =
+            {
+                "OR", "XOR", "AND", "NAND", "NOR", "NOT"
+            };
+
+            String[] circuitParts;
 
             int i = 0;
             foreach (string line in lines)
             {
-                String[] circuitParts = fp.GetCircuitParts(line);
-                Node node = fp.AddNode(circuitParts);
-
-                Assert.IsTrue(node.GetType().Name.Equals(types[i]));
+                circuitParts = fp.GetCircuitParts(line);
+                Assert.AreEqual(circuitParts[0], expectedKeys[i]);
+                Assert.AreEqual(circuitParts[1], expectedValues[i]);
                 i++;
             }
         }

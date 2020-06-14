@@ -19,6 +19,8 @@ namespace Adder.IO
         public bool Cin = false;
         public IDictionary<string, bool> InputDictionary = new Dictionary<string, bool>();
         public IDictionary<string, Node> NodeDictionairy = new Dictionary<string, Node>();
+        public List<string[]> Nodes { get; set; }
+        public List<string[]> Edges { get; set; }
         Circuit circuit;
 
         public Circuit ParseCircuit(String filePath)
@@ -29,8 +31,8 @@ namespace Adder.IO
 
             if (lines != null)
             {
-
-                circuit = new Circuit() { Name = "Circuit 1" };
+                Nodes = new List<string[]>();
+                Edges = new List<string[]>();
 
                 foreach (String line in lines)
                 {
@@ -46,15 +48,11 @@ namespace Adder.IO
                             String[] circuitParts = GetCircuitParts(line);
                             if (readingEdges)
                             {
-                                AddEdges(circuitParts);
+                                Edges.Add(circuitParts);
                             }
                             else
                             {
-                                Node node = AddNode(circuitParts);
-                                if (node != null)
-                                {
-                                    NodeDictionairy[node.Name] = node;
-                                }
+                                Nodes.Add(circuitParts);
                             }
                         }
                     }
@@ -64,61 +62,6 @@ namespace Adder.IO
             }
 
             return null;
-        }
-
-        public Node AddNode(String[] nodeParts)
-        {
-            if ( ! nodeParts[1].Contains("INPUT") && ! nodeParts[1].Contains("PROBE"))
-            {
-                Builder nodeBuilder = new Builder(nodeParts[1]);
-                nodeBuilder.setName(nodeParts[0]);
-
-                return nodeBuilder.Result();
-            }
-            if (nodeParts[1].Contains("INPUT"))
-            {
-                InputDictionary.Add(nodeParts[0], nodeParts[1].Contains("HIGH") ? true : false);
-            }
-
-            return null;
-        }
-
-        public void AddEdges(String[] edgeParts)
-        {
-
-            bool inputType = false;
-            bool input = false;
-
-            if (!edgeParts[0].StartsWith("NODE"))
-            {
-                inputType = true;
-                input = InputDictionary[edgeParts[0]];
-            }
-
-            foreach(String edgePart in edgeParts.Skip(1))
-            {
-               
-                if (edgePart.StartsWith("NODE"))
-                {
-
-                    if (inputType)
-                    {
-                        NodeDictionairy[edgePart].AddDefaultInputs(edgeParts[0],input);
-                    }
-                    else
-                    {
-                        NodeDictionairy[edgeParts[0]].AddOutput(NodeDictionairy[edgePart]);
-                    }
-                } else {
-                    NodeDictionairy[edgeParts[0]].OutputName = edgePart;
-                }
-            }
-
-            if (!inputType)
-            {
-                circuit.Components.Add(NodeDictionairy[edgeParts[0]]);
-            }
-
         }
 
         public String[] GetCircuitParts(String line)
